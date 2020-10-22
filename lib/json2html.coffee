@@ -17,7 +17,7 @@ makeLabelDiv = (options, level, keyname, datatype)->
 		else
 			return "<div class='leaf level#{level}'><span class='j2hlabel'>#{keyname}:</span></div>"
 	else return ""
-	
+
 getContentClass = (keyname)->
 	if _.isString(keyname)
 		return "content"
@@ -59,20 +59,20 @@ isTable = (arr)->
 				return false
 			else
 				return true
-			
+
 drawTable = (arr)->
 	drawRow = (headers, rowObj) ->
 		return "<td>" + (rowObj[header] for header in headers).join("</td><td>") + "</td>"
 	cols = _.keys(arr[0])
 	content = ((drawRow(cols, rowObj)) for rowObj in arr)
-	
-	headingHtml = "<tr><th>" + cols.join("</th><th>") + "</th></tr>" 
+
+	headingHtml = "<tr><th>" + cols.join("</th><th>") + "</th></tr>"
 	contentHtml = "<tr>" + content.join("</tr><tr>") + "</tr>"
-	
+
 	return "<table>#{headingHtml}#{contentHtml}</table>"
-	
-		
-	
+
+
+
 render = (name, data, options, level, altrow)->
 	#console.log "printing level #{level} for key #{name}"
 	contentClass = getContentClass(name)
@@ -86,7 +86,7 @@ render = (name, data, options, level, altrow)->
 		<div class=\"j2hcollapse clearfix #{altrow}\">
 			#{title}
 			<div class=\"#{contentClass}\">#{subs}</div>
-		</div>" 
+		</div>"
 	else if isLeafValue(data)
 		title = makeLabelDiv(options, level, name)
 		if _.isFunction(data)
@@ -128,11 +128,11 @@ head = '''
 #j2h th {
 	color: #888 ;
 }
-#j2h table,th, td {
+#j2h table,#j2h th, #j2h td {
 	border: 1px solid #DDD;
 	padding: 10px 5px ;
 }
-#j2h th, td {
+#j2h th, #j2h td {
 	text-align:center;
 }
 #j2h .content {
